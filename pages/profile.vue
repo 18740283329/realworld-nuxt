@@ -74,14 +74,12 @@
 
 <script>
 import { getUserInfo, unFollowUser, followUser, getArticles } from "../api";
-import { mapState } from "vuex";
 import ArticleItem from "../components/article";
 
 export default {
   components: {
     ArticleItem
   },
-  middleware: "authenticated",
   data() {
     return {
       profile: {},
@@ -92,7 +90,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user"])
+    user: function() {
+      return this.$store.state.user || {}
+    }
   },
   methods: {
     async getUserInfo() {
